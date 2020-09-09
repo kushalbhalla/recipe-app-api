@@ -38,3 +38,32 @@ class IngredientViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
     def perform_create(self, serializer):
         """Create a new ingrdient"""
         serializer.save(user=self.request.user)
+
+
+# 
+# class BaseRecipeAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
+#     """Base viewset for user owned recipe attributes"""
+#     authentication_classes = (TokenAuthentication,)
+#     permission_classes = (IsAuthenticated,)
+#
+#     def get_queryset(self):
+#         """Return objects for the current authenticated uer only"""
+#         return self.queryset.filter(user=self.request.user.id).order_by('-name')
+#
+#     def perform_create(self, serializer):
+#         """Create a new object"""
+#         serializer.save(user=self.request.user)
+#
+#
+# class TagViewSet(BaseRecipeAttrViewSet):
+#     """Manage tags in the database"""
+#
+#     queryset = Tag.objects.all()
+#     serializer_class = serializers.TagSerializer
+#
+#
+# class IngredientViewSet(BaseRecipeAttrViewSet):
+#     """Manage ingrdient in the database"""
+#
+#     queryset = Ingredient.objects.all()
+#     serializer_class = serializers.IngredientSerializer
