@@ -54,9 +54,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """Return appropriate serializer class"""
         if self.action == 'retrieve':
             return serializers.RecipeDetailSerializer
-
         return self.serializer_class
 
+    def perform_create(self, serializer):
+        """Create a new recipe"""
+        serializer.save(user=self.request.user)
 # class BaseRecipeAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
 #     """Base viewset for user owned recipe attributes"""
 #     authentication_classes = (TokenAuthentication,)
